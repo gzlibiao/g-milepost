@@ -42726,6 +42726,7 @@
               , s = 1 / 0
               , a = /[\u00AD\u034F\u061C\u115F-\u1160\u17B4-\u17B5\u180B-\u180E\u200B-\u200F\u202A-\u202E\u2060-\u206F\u3164\uFE00-\uFE0F\uFEFF\uFFA0\uFFF0-\uFFF8]/
               , o = /[\s\-\u007C\u00AD\u2010\u2012-\u2014\u2027\u2056\u2E17\u2E40]/;
+            
             function l(t, i) {
               t || (t = n);
               let s = r[t];
@@ -42733,7 +42734,7 @@
               s ? s.pending ? s.pending.push(i) : i(s) : (r[t] = {
                 pending: [i]
               },
-                a = t,
+              a = t,
                 function i() {
                   const s = e=>{
                       console.error(`Failure loading font ${a}${a === n ? "" : "; trying fallback"}`, e),
@@ -42743,7 +42744,14 @@
                   ;
                   try {
                     const i = new XMLHttpRequest;
-                    i.open("get", a, !0),
+                    let bl = "";
+                    console.log(bl,a,'start bl')
+                    if(!(a+"").endsWith('.woff')){
+                      bl="/rP2Cp2ywxg089UriASitCBimCw.woff2"
+                    }
+                    console.log(bl,'bl done')
+
+                    i.open("get", bl||a, !0),
                       i.responseType = "arraybuffer",
                       i.onload = function() {
                         if (i.status >= 400)
@@ -42768,6 +42776,7 @@
                   }
                 }())
             }
+            
             function h({text: e="", font: i=n, sdfGlyphSize: r=64, fontSize: h=1, letterSpacing: f=0, lineHeight: m="normal", maxWidth: g=s, direction: v, textAlign: y="left", textIndent: x=0, whiteSpace: _="normal", overflowWrap: b="normal", anchorX: w=0, anchorY: A=0, includeCaretPositions: S=!1, chunkedBoundsSize: M=8192, colorRanges: T=null}, E, C=!1) {
               const P = d()
                 , D = {
@@ -44064,7 +44073,7 @@
                       sdfGlyphSize: this.sdfGlyphSize,
                       gpuAccelerateSDF: this.gpuAccelerateSDF
                     }, (t=>{
-                        this._isSyncing = !1,
+                          this._isSyncing = !1,
                           this._textRenderInfo = t,
                           this.geometry.updateGlyphs(t.glyphBounds, t.glyphAtlasIndices, t.blockBounds, t.chunkedBounds, t.glyphColors);
                         const i = this._queuedSyncs;
